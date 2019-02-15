@@ -31,18 +31,6 @@ resource "alicloud_eip_association" "snat-ip-association" {
   instance_id   = "${alicloud_nat_gateway.nat-1.id}"
 }
 
-resource "alicloud_snat_entry" "zone-1a-snat" {
-  snat_table_id     = "${alicloud_nat_gateway.nat-1.snat_table_ids}"
-  source_vswitch_id = "${alicloud_vswitch.zone-1a.id}"
-  snat_ip           = "${alicloud_eip.snat-ip.ip_address}"
-}
-
-resource "alicloud_snat_entry" "zone-1b-snat" {
-  snat_table_id     = "${alicloud_nat_gateway.nat-1.snat_table_ids}"
-  source_vswitch_id = "${alicloud_vswitch.zone-1b.id}"
-  snat_ip           = "${alicloud_eip.snat-ip.ip_address}"
-}
-
 # ---------------
 # VSwitch zone 1a
 # ---------------
@@ -64,6 +52,19 @@ resource "alicloud_route_table_attachment" "zone-1a-routes-attachment" {
   route_table_id = "${alicloud_route_table.zone-1a-routes.id}"
 }
 
+resource "alicloud_snat_entry" "zone-1a-snat" {
+  snat_table_id     = "${alicloud_nat_gateway.nat-1.snat_table_ids}"
+  source_vswitch_id = "${alicloud_vswitch.zone-1a.id}"
+  snat_ip           = "${alicloud_eip.snat-ip.ip_address}"
+}
+
+resource "alicloud_route_entry" "zone-1a-snat-route" {
+  route_table_id        = "${alicloud_route_table.zone-1a-routes.id}"
+  destination_cidrblock = "0.0.0.0/32"
+  nexthop_type          = "NatGateway"
+  nexthop_id            = "${alicloud_nat_gateway.nat-1.id}"
+}
+
 # ---------------
 # VSwitch zone 1b
 # ---------------
@@ -83,4 +84,17 @@ resource "alicloud_route_table" "zone-1b-routes" {
 resource "alicloud_route_table_attachment" "zone-1b-routes-attachment" {
   vswitch_id     = "${alicloud_vswitch.zone-1b.id}"
   route_table_id = "${alicloud_route_table.zone-1b-routes.id}"
+}
+
+resource "alicloud_snat_entry" "zone-1b-snat" {
+  snat_table_id     = "${alicloud_nat_gateway.nat-1.snat_table_ids}"
+  source_vswitch_id = "${alicloud_vswitch.zone-1b.id}"
+  snat_ip           = "${alicloud_eip.snat-ip.ip_address}"
+}
+
+resource "alicloud_route_entry" "zone-1b-snat-route" {
+  route_table_id        = "${alicloud_route_table.zone-1b-routes.id}"
+  destination_cidrblock = "0.0.0.0/32"
+  nexthop_type          = "NatGateway"
+  nexthop_id            = "${alicloud_nat_gateway.nat-1.id}"
 }
