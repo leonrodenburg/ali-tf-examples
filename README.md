@@ -14,4 +14,17 @@ terraform apply
 ```
 
 This will set the variables, initialize any plugins needed and calculate the changes Terraform will make in your account.
-To agree with the changes, type `yes` and press Enter.
+
+To set the variables, you can alternatively add a `terraform.tfvars` file in the template directory, with the following contents:
+
+```
+access_key = "<your access key>"
+
+secret_key = "<your access key secret>"
+
+region = "<preferred region>"
+```
+
+This will save you from setting the environment variables every time you open a new shell.
+
+To agree with the changes Terraform proposes when running `terraform apply`, type `yes` and press Enter.
