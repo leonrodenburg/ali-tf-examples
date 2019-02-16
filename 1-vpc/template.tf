@@ -60,7 +60,7 @@ resource "alicloud_snat_entry" "zone-1a-snat" {
 
 resource "alicloud_route_entry" "zone-1a-snat-route" {
   route_table_id        = "${alicloud_route_table.zone-1a-routes.id}"
-  destination_cidrblock = "0.0.0.0/32"
+  destination_cidrblock = "0.0.0.0/0"
   nexthop_type          = "NatGateway"
   nexthop_id            = "${alicloud_nat_gateway.nat-1.id}"
 }
@@ -94,7 +94,7 @@ resource "alicloud_snat_entry" "zone-1b-snat" {
 
 resource "alicloud_route_entry" "zone-1b-snat-route" {
   route_table_id        = "${alicloud_route_table.zone-1b-routes.id}"
-  destination_cidrblock = "0.0.0.0/32"
+  destination_cidrblock = "0.0.0.0/0"
   nexthop_type          = "NatGateway"
   nexthop_id            = "${alicloud_nat_gateway.nat-1.id}"
 }
