@@ -7,7 +7,7 @@ resource "alicloud_ess_scaling_group" "scaling-group-1" {
   scaling_group_name = "scaling-group-1"
   default_cooldown   = 60
   vswitch_ids        = ["${alicloud_vswitch.zone-1a.id}", "${alicloud_vswitch.zone-1b.id}"]
-  removal_policies   = ["OldestInstance", "OldestScalingConfiguration"]
+  removal_policies   = ["OldestScalingConfiguration", "OldestInstance"]
   multi_az_policy    = "BALANCE"
 }
 
