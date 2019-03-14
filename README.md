@@ -2,7 +2,12 @@
 
 Collection of Terraform templates to get up and running in Alibaba Cloud in just a few minutes.
 
-## Basic usage
+## Prequisites
+
+You need to have Terraform installed to deploy the examples. See the [Terraform documentation](https://learn.hashicorp.com/terraform/getting-started/install.html) for
+guidance on how to get it on your machine. If you are on macOS and use Homebrew, you can install Terraform using `brew install terraform`.
+
+## Deploy an example
 
 To use any of the examples, `cd` into the directory and run the following:
 
