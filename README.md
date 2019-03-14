@@ -12,7 +12,7 @@ terraform apply
 ```
 
 This will install the necessary providers and plugins, ask you for your Alibaba Cloud access key, secret access key and region, and finally show you the deployment plan.
-The necessary keys can be created in the Alibaba Cloud console under [Access Key Management](https://usercenter.console.aliyun.com/#/manage/ak). For a list of regions, [click here](https://www.alibabacloud.com/help/doc-detail/40654.htm).
+The necessary keys can be created in the Alibaba Cloud console under [AccessKey](https://usercenter.console.aliyun.com/#/manage/ak) in the dropdown menu under your avatar. For a list of regions, [click here](https://www.alibabacloud.com/help/doc-detail/40654.htm).
 
 When Terraform shows you the plan, type `yes` and press Enter to create the new resources.
 
