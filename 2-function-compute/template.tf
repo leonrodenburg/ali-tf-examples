@@ -13,7 +13,7 @@ data "archive_file" "source" {
 }
 
 resource "alicloud_fc_function" "fc_function" {
-  service  = "${alicloud_fc_service.fc_service.name}"
+  service  = alicloud_fc_service.fc_service.name
   name     = "test-function"
   filename = "./dist/alicloud-test-${random_id.postfix.b64_url}.zip"
   runtime  = "nodejs8"
@@ -21,8 +21,8 @@ resource "alicloud_fc_function" "fc_function" {
 }
 
 resource "alicloud_fc_trigger" "fc_trigger" {
-  service  = "${alicloud_fc_service.fc_service.name}"
-  function = "${alicloud_fc_function.fc_function.name}"
+  service  = alicloud_fc_service.fc_service.name
+  function = alicloud_fc_function.fc_function.name
   name     = "test-http-trigger"
   type     = "http"
   config   = "{ \"methods\": [\"GET\"], \"authType\": \"anonymous\" }"
